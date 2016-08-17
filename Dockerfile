@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7.0.9-apache
 
 ENV PS_DOMAIN prestashop.local
 ENV DB_SERVER 127.0.0.1
