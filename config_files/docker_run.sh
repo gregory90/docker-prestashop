@@ -1,4 +1,14 @@
 #!/bin/sh
+if [ $PS_FOLDER_INSTALL != "install" ]; then
+  echo "\n* Renaming install folder as $PS_FOLDER_INSTALL ...";
+  mv /var/www/html/install /var/www/html/$PS_FOLDER_INSTALL/
+fi
+
+if [ $PS_FOLDER_ADMIN != "admin" ]; then
+  echo "\n* Renaming admin folder as $PS_FOLDER_ADMIN ...";
+  mv /var/www/html/admin /var/www/html/$PS_FOLDER_ADMIN/
+fi
+
 if [ ! -f ./config/settings.inc.php  ]; then
 	if [ $PS_DEV_MODE -ne 0 ]; then
 		echo "\n* Enabling DEV mode ...";
@@ -8,16 +18,6 @@ if [ ! -f ./config/settings.inc.php  ]; then
 	if [ $PS_HOST_MODE -ne 0 ]; then
 		echo "\n* Enabling HOST mode ...";
 		echo "define('_PS_HOST_MODE_', true);" >> /var/www/html/config/defines.inc.php
-	fi
-
-	if [ $PS_FOLDER_INSTALL != "install" ]; then
-		echo "\n* Renaming install folder as $PS_FOLDER_INSTALL ...";
-		mv /var/www/html/install /var/www/html/$PS_FOLDER_INSTALL/
-	fi
-
-	if [ $PS_FOLDER_ADMIN != "admin" ]; then
-		echo "\n* Renaming admin folder as $PS_FOLDER_ADMIN ...";
-		mv /var/www/html/admin /var/www/html/$PS_FOLDER_ADMIN/
 	fi
 
 	if [ $PS_HANDLE_DYNAMIC_DOMAIN = 0 ]; then
